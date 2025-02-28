@@ -1,10 +1,15 @@
-# Getting Started with Create React App
+# exchange-rates 
 
+This project allows for the user to check exchange rates on several popular currencies, using Uphold API and its sandbox environment. 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+You must run this in order to install all dependencies and run the project.
 
 ### `npm start`
 
@@ -16,31 +21,34 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode. Some unit tests were performed but due to lack of time, they are barely worth mentioning.
 
-### `npm run build`
+### `npm run lint`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run ESLint on the project. Check eslint.config.mjs in order to tweak the settings.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run format`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run Prettier's format on the project.
 
-### `npm run eject`
+## Notes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+In order to run the project without CORS issues, I recommend using a browser extension (after a lot of trying I was unable to fix CORS with Uphold's API). I recommend the following: https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc?hl=pt-BR
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Design choices
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The app uses TanStack's React Query, in order to cache the request response from the API. The stale time limit is the default (5 minutes) - this means that if the user comes back the page within 5 minutes,  the cached results will be used. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app uses Tailwind, scss syntax and the HeroUI library. It's the setup I've used for a while now and I feel like it brings out the best of both Tailwind and classic scss files: you get to write very simple and compreensive CSS with Tailwind, while also making sure that you components don't become unreadable, due to all the inline styles.
+Right now, all the styles are in App.scss, but if the project kept growing or the styles were more complex, it would obviously be necessary to separate everything into different files.
+Finally, the scss files follow the BEM naming conventions: https://getbem.com/.
 
-## Learn More
+## Further improvements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+On a future occasion, I would like to:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Fix CORS. If I had to take an educated guess, maybe the endpoints aren't "protected" in the sense they don't need a token to be accessed, but still need some sort of authentication in order to be accessed without having to use a browser extension. I tried several things, such as defining the API base url as a proxy, for my React app - which should work in theory, but was flagged as suspicious by the API, and all responses were 403 Forbidden. I tried to expose my local port using ngrok, and configure the authentication properly in the Sandbox environment (using the clientId and clientSecret on the request), but as expected that didn't make a difference. The next thing I would try would be to create a proxy backend app with Express. I would also try to deploy the app to Github Pages, for instances, and configure that link in the Sandbox environment, although I doubt that would work.
+Finally, I'm very curious to know what's the CORS policy for the API!
+- Improve styles. This wasn't the focus of the project and I think it looks quite nice and follows the mockup, but could look more like the actual application.
+- Add tests. I hate to deliver a project with this ammount of tests but unfortunately there's only so much time in a day and this had to be delivered. I especially hate that I haven't developed any UI tests (render component, check buttons, check inputs...)
+

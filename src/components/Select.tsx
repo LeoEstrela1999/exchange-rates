@@ -1,7 +1,5 @@
-import {
-  Select as HeroSelect,
-  SelectItem,
-} from "@heroui/select";
+import React from "react";
+import { Select as HeroSelect, SelectItem } from "@heroui/select";
 import Currency from "../model/Currency";
 import Item from "./Item";
 
@@ -25,7 +23,11 @@ const Select = ({
       onSelectionChange={(e) => onSelect(e.anchorKey as string)}
       renderValue={(currencies) => {
         return currencies.map((currency) => (
-          <Item icon={currency.data?.icon} id={currency.data?.id} />
+          <Item
+            key={"select-item-" + currency.data?.id}
+            icon={currency.data?.icon}
+            id={currency.data?.id}
+          />
         ));
       }}
     >

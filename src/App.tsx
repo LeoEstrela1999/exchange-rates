@@ -31,6 +31,7 @@ function App() {
         <div className="app__list">
           {currencyExchanges.map((curr) => (
             <ListElement
+              key={"list-element-" + curr.value}
               value={curr.value}
               name={curr.convertingTo}
               icon={curr.icon}
