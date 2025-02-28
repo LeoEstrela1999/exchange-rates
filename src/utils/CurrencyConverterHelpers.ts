@@ -63,7 +63,7 @@ export const getCurrencyIdFromPair = (otherCurrency: string, pair: string) => {
   return pair.replace(otherCurrency, "").replace("-", "");
 };
 
-const convertTickerToCurrencyExchange = (
+export const convertTickerToCurrencyExchange = (
   ticker: Ticker,
   currency: string,
   value: number,

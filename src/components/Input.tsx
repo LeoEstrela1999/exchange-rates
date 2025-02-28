@@ -1,5 +1,4 @@
 import { NumberInput } from "@heroui/react";
-import { ChangeEvent } from "react";
 
 interface InputProps {
   value: number;
@@ -13,7 +12,7 @@ const Input = ({ value, onChange, defaultValue }: InputProps) => {
       value={value}
       onValueChange={onChange}
       disableAnimation
-      className="flex w-60"
+      className="input"
       defaultValue={defaultValue}
       minValue={0}
     />

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import SDK from "@uphold/uphold-sdk-javascript";
-import Currency from "../model/Currency";
 import Ticker from "../model/Ticker";
 import {
   allowedCurrencies,
@@ -71,7 +70,6 @@ const useCurrencyConverter = () => {
             getCurrencyIdFromPair(selectedCurrency, ticker.pair) === curr.id,
         ),
       );
-
       return filteredTickers;
     },
     [selectedCurrency],

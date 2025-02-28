@@ -1,9 +1,7 @@
 import {
   Select as HeroSelect,
-  SelectSection,
   SelectItem,
 } from "@heroui/select";
-import CurrencyExchange from "../model/CurrencyExchange";
 import Currency from "../model/Currency";
 import Item from "./Item";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import useCurrencyConverter from "./hooks/useCurrencyConverter";
 import Input from "./components/Input";
 import Select from "./components/Select";
@@ -9,10 +9,10 @@ import { Spinner } from "@heroui/react";
 
 function App() {
   const {
-    currencyExchanges,
-    value,
     handleChangeValue,
     handleSelectCurrency,
+    currencyExchanges,
+    value,
     selectedCurrency,
     isLoading,
   } = useCurrencyConverter();
