@@ -1,7 +1,7 @@
 interface CurrencyExchange {
-    value: number;
-    convertingTo: string;
-    icon: string;
+  value: number;
+  convertingTo: string;
+  icon: string;
 }
 
-export default CurrencyExchange
+export default CurrencyExchange;

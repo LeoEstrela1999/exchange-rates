@@ -3,81 +3,78 @@ import CurrencyExchange from "../model/CurrencyExchange";
 import Ticker from "../model/Ticker";
 
 export const allowedCurrencies: Currency[] = [
-    {
-      id: 'AED',
-      icon: '/images/AED.png',
-    },
-    {
-        id: 'BCH',
-        icon: '/images/BCH.png',
-      },
-      {
-        id: 'BRL',
-        icon: '/images/BRL.png',
-      },
-      {
-        id: 'BTC',
-        icon: '/images/BTC.png',
-      },
-      {
-        id: 'BTG',
-        icon: '/images/BTG.png',
-      },
-      {
-        id: 'CAD',
-        icon: '/images/CAD.png',
-      },
-    {
-        id: 'CNY',
-        icon: '/images/CNY.png',
-      },
-      {
-        id: 'Crypto',
-        icon: '/images/Crypto.png',
-      },
-      {
-        id: 'ETH',
-        icon: '/images/ETH.png',
-      },
-      {
-        id: 'EUR',
-        icon: '/images/EUR.png',
-      },
-      {
-        id: 'GBP',
-        icon: '/images/GBP.png',
-      },
-      {
-        id: 'ILS',
-        icon: '/images/ILS.png',
-      },
-      {
-        id: 'UAE',
-        icon: '/images/UAE.png',
-      },
-      {
-        id: 'USD',
-        icon: '/images/USD.png',
-      },
-      {
-        id: 'VOX',
-        icon: '/images/VOX.png',
-      }
-  ]
+  {
+    id: "BAT",
+    icon: "/images/BAT.png",
+  },
+  {
+    id: "BCH",
+    icon: "/images/BCH.png",
+  },
+  {
+    id: "BTC",
+    icon: "/images/BTC.png",
+  },
+  {
+    id: "BTG",
+    icon: "/images/BTG.png",
+  },
+  {
+    id: "CAD",
+    icon: "/images/CAD.png",
+  },
+  {
+    id: "CNY",
+    icon: "/images/CNY.png",
+  },
+  {
+    id: "ETH",
+    icon: "/images/ETH.png",
+  },
+  {
+    id: "EUR",
+    icon: "/images/EUR.png",
+  },
+  {
+    id: "GBP",
+    icon: "/images/GBP.png",
+  },
+  {
+    id: "ILS",
+    icon: "/images/ILS.png",
+  },
+  {
+    id: "USD",
+    icon: "/images/USD.png",
+  },
+];
 
-  export const getSupportedCurrencyExchanges = (tickerList: Ticker[], currency: string, value: number) => {
-    const tickers = tickerList.filter((ticker) => ticker.currency === currency && allowedCurrencies.some((curr) => curr.id !== currency && ticker.pair.includes(curr.id)));
-    const finalList = tickers.map((ticker) => (convertTickerToCurrencyExchange(ticker, currency, value)));
+export const getValuesForExchanges = (
+  tickerList: Ticker[],
+  currency: string,
+  value: number,
+) => {
+  return tickerList.map((ticker) =>
+    convertTickerToCurrencyExchange(ticker, currency, value),
+  );
+};
 
-    return finalList  
-  }
+export const getCurrencyIdFromPair = (otherCurrency: string, pair: string) => {
+  return pair.replace(otherCurrency, "").replace("-", "");
+};
 
-  const convertTickerToCurrencyExchange = (ticker: Ticker, currency: string, value: number) => {
-    const id = ticker.pair.replace(currency, '').replace('-', '');
-    const toReturn: CurrencyExchange = {
-        value: Number(ticker.ask) * value,
-        convertingTo:  id,
-        icon: '/image/' + id + '.png'
-    }
-    return toReturn;
-  }
+const convertTickerToCurrencyExchange = (
+  ticker: Ticker,
+  currency: string,
+  value: number,
+) => {
+  const id = getCurrencyIdFromPair(currency, ticker.pair);
+  const askNumber = Number(ticker.ask);
+  const finalValue = Math.round(askNumber * value * 1000) / 1000;
+  const toReturn: CurrencyExchange = {
+    value: finalValue,
+    convertingTo: id,
+    icon: "/images/" + id + ".png",
+  };
+  return toReturn;
+};
