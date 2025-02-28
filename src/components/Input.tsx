@@ -16,6 +16,7 @@ const Input = ({ value, onChange, defaultValue }: InputProps) => {
       className="input"
       defaultValue={defaultValue}
       minValue={0}
+      aria-label={'number input'}
     />
   );
 };

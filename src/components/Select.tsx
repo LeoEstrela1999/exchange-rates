@@ -21,6 +21,7 @@ const Select = ({
       selectedKeys={[selectedCurrency]}
       disableAnimation
       onSelectionChange={(e) => onSelect(e.anchorKey as string)}
+      aria-label={'select currency'}
       renderValue={(currencies) => {
         return currencies.map((currency) => (
           <Item
@@ -32,7 +33,7 @@ const Select = ({
       }}
     >
       {(currency) => (
-        <SelectItem key={currency.id}>
+        <SelectItem key={currency.id} textValue={currency.id}>
           <Item icon={currency.icon} id={currency.id} />
         </SelectItem>
       )}

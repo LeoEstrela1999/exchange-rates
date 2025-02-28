@@ -15,7 +15,12 @@ function App() {
     value,
     selectedCurrency,
     isLoading,
+    isError
   } = useCurrencyConverter();
+
+  if(isError) return <div>
+    There was an error while fetching the exchange rates. Please try again later.
+  </div>
 
   return (
     <div className="app">

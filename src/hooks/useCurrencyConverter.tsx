@@ -17,7 +17,7 @@ const useCurrencyConverter = () => {
     CurrencyExchange[]
   >([]);
 
-  const { isLoading, data: currencyRates } = useQuery({
+  const { isLoading, isError, data: currencyRates } = useQuery({
     queryKey: ["currency", selectedCurrency],
     queryFn: () => getTickers(),
     refetchOnWindowFocus: false,
@@ -80,7 +80,7 @@ const useCurrencyConverter = () => {
   }, []);
 
   const handleChangeValue = useCallback((newValue: number) => {
-    setValue(newValue);
+    setValue(newValue ? newValue : 1);
   }, []);
 
   return {
@@ -90,6 +90,7 @@ const useCurrencyConverter = () => {
     value,
     selectedCurrency,
     isLoading,
+    isError
   };
 };
 
