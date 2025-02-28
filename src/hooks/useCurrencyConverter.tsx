@@ -33,20 +33,16 @@ const useCurrencyConverter = () => {
     }, [value]);
 
     useEffect(() => {
-        debugger;
         const exchanges = getSupportedCurrencyExchanges(currencyRates ?? [], selectedCurrency, actualValue);
         setCurrencyExchanges(exchanges);
     }, [actualValue, currencyRates]);
 
     const getTickers = useCallback(async () => {
-        debugger;
         const rates: Ticker[] = await sdk.getTicker(selectedCurrency);
         return rates;
     }, [sdk, selectedCurrency]);
 
     const handleSelectCurrency = useCallback((newCurrency: string) => {
-        debugger;
-        console.log(newCurrency)
         setSelectedCurrency(newCurrency);
     }, []);
 
