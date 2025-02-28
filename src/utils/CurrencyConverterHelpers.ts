@@ -67,13 +67,13 @@ export const allowedCurrencies: Currency[] = [
 
   export const getSupportedCurrencyExchanges = (tickerList: Ticker[], currency: string, value: number) => {
     const tickers = tickerList.filter((ticker) => ticker.currency === currency && allowedCurrencies.some((curr) => curr.id !== currency && ticker.pair.includes(curr.id)));
-    const finalList = tickers.map((ticker) => (convertTickerToCurrencyExchange(ticker, value)));
+    const finalList = tickers.map((ticker) => (convertTickerToCurrencyExchange(ticker, currency, value)));
 
     return finalList  
   }
 
-  const convertTickerToCurrencyExchange = (ticker: Ticker, value: number) => {
-    const id = ticker.pair.split('-')[0];
+  const convertTickerToCurrencyExchange = (ticker: Ticker, currency: string, value: number) => {
+    const id = ticker.pair.replace(currency, '').replace('-', '');
     const toReturn: CurrencyExchange = {
         value: Number(ticker.ask) * value,
         convertingTo:  id,

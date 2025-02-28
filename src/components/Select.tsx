@@ -3,14 +3,14 @@ import CurrencyExchange from "../model/CurrencyExchange";
 import Currency from "../model/Currency";
 
 interface DropdownProps {
-    selectedCurrency?: string;
+    selectedCurrency: string;
     currencyList: Currency[];
     onSelect: (newCurrency: string) => void;
 }
 
-const Select = ({currencyList, onSelect}: DropdownProps) => {
+const Select = ({currencyList, onSelect, selectedCurrency}: DropdownProps) => {
     return (
-        <HeroSelect className="select" label="Select an animal" disableAnimation onSelectionChange={(e) => onSelect(e.anchorKey as string)}>
+        <HeroSelect className="select" selectedKeys={selectedCurrency} label="Select an animal" disableAnimation onSelectionChange={(e) => onSelect(e.anchorKey as string)}>
         {currencyList.map((currency) => (
           <SelectItem key={currency.id}>
             <div className="flex flex-row gap-2">

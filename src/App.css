@@ -14,3 +14,11 @@
 .app__input-container {
   @apply flex flex-row m-auto gap-6;
 }
+
+.app__list {
+  @apply flex flex-col items-center gap-3;
+}
+
+.list-element {
+  @apply flex flex-row w-80 ;
+}

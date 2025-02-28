@@ -9,8 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 const useCurrencyConverter = () => {
     const sdk = useMemo(() => new SDK({
         baseUrl: 'http://api-sandbox.uphold.com',
-        clientId: 'd639a6f795694ee0ccf5e16294c70f9deaff95b5',
-        clientSecret: '43f898705843b2249231fb4c624914e7bd3f3de3'
+        clientId: 'foo',
+        clientSecret: 'bar'
       }), []);
 
 
@@ -54,7 +54,8 @@ const useCurrencyConverter = () => {
         handleSelectCurrency,
         handleChangeValue,
         currencyExchanges,
-        value
+        value,
+        selectedCurrency
     }
 
 }
