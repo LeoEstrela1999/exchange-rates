@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import './components/Select.css';
+@import './components/Input.css';
+
+
+.app {
+  @apply flex flex-col gap-3 justify-center py-12;
+}
+
+.app__input-container {
+  @apply flex flex-row m-auto gap-6;
+}
